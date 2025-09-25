@@ -1,4 +1,6 @@
 #include <iostream>
+#include <vector>
+#include <fstream>
 using namespace std;
 
 class Movie {
@@ -25,5 +27,33 @@ public:
 
 
 int main() {
+     //File Opening
+	ifstream file;
+	file.open("input.txt");
+	if (!file.is_open()) {
+	    cout << "Failed to open file" << endl;
+	    return 1;
+	}
     
+    //List populating
+    vector<Movie> movieList;
+    Movie currentMovie;
+    string line;
+    int count = 1;
+
+    while (getline(file, line)) {
+        if (count % 3 == 0) {
+            currentMovie.setScreenWriter(line);
+            count = 0;
+        } 
+        else if (count % 2 == 0) {
+            currentMovie.setYear(stoi(line));
+        }
+        else {
+            currentMovie.setTitle(line);
+        }
+
+        movieList.push_back(currentMovie);
+        count++;
+    }
 }
