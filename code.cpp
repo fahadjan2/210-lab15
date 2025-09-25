@@ -1,8 +1,11 @@
+// COMSC-210 | Lab 15 | Fahad Fawad Ahmad
+// IDE used: Visual Studio
 #include <iostream>
 #include <vector>
 #include <fstream>
 using namespace std;
 
+//Movie Class with setters and getters for each member variable, and a print method to output all the members' values
 class Movie {
 private:
     string title;
@@ -45,6 +48,7 @@ int main() {
         if (count % 3 == 0) {
             currentMovie.setScreenWriter(line);
             count = 0;
+            movieList.push_back(currentMovie);
         } 
         else if (count % 2 == 0) {
             currentMovie.setYear(stoi(line));
@@ -52,8 +56,11 @@ int main() {
         else {
             currentMovie.setTitle(line);
         }
-
-        movieList.push_back(currentMovie);
         count++;
+    }
+
+    //Output
+    for (int i = 0; i < movieList.size(); i++) {
+        movieList[i].print();
     }
 }
